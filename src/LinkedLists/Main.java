@@ -6,7 +6,7 @@ public class Main {
         list.insertFirst(2);
         list.insertFirst(10);
         list.insertFirst(5);
-        list.insert(100,2);
+        list.recursiveInsert(2,100);
         list.display();
         list.delete(2);
         list.display();
