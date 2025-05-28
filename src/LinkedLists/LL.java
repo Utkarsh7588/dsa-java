@@ -1,10 +1,10 @@
 package LinkedLists;
 
 public class LL {
-    private Node head;
-    private Node tail;
+    protected Node head;
+    protected Node tail;
 
-    private int size;
+    protected int size;
 
     public LL() {
         this.size = 0;
@@ -23,10 +23,10 @@ public class LL {
     public void display() {
         Node temp = head;
         while (temp != null && temp.next != null) {
-            System.out.print(temp.value + "->");
+            System.out.print(temp.val + "->");
             temp = temp.next;
         }
-        System.out.println(temp.value);
+        System.out.println(temp.val);
     }
 
     public void insertLast(int val) {
@@ -116,7 +116,7 @@ public class LL {
     public Node find(int value) {
         Node node = head;
         while (node != null) {
-            if (node.value == value) {
+            if (node.val == value) {
                 return node;
             }
             node = node.next;
@@ -124,18 +124,18 @@ public class LL {
         return null;
     }
 
-    private class Node {
-        private int value;
-        private Node next;
+    protected class Node {
+        public int val;
+        public Node next;
 
 
         public Node(int value) {
-            this.value = value;
+            this.val = value;
         }
 
         public Node(Node next, int value) {
             this.next = next;
-            this.value = value;
+            this.val = value;
         }
     }
 
