@@ -124,7 +124,7 @@ public class LL {
         return null;
     }
 
-    protected class Node {
+    protected static class Node {
         public int val;
         public Node next;
 
