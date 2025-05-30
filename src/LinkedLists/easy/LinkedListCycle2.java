@@ -10,8 +10,8 @@ public class LinkedListCycle2 extends LL {
         LL.Node node4 = new Node(4);
 
         // Creating a cycle: 3 -> 2 -> 0 -> 4
-        //                          ^         |
-        //                          |_________|
+        //                        ^         |
+        //                        |_________|
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
