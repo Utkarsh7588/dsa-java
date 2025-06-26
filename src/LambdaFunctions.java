@@ -1,4 +1,7 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 public class LambdaFunctions {
     public static void main(String[] args) {
@@ -61,6 +64,13 @@ public class LambdaFunctions {
         //both do the same thing
 
         BinaryOperator<Integer> c = (x, y) -> x + y;
+
+        List<String> students = Arrays.asList("Ram", "Shyam", "Ghanshyam");
+        students.forEach(x -> System.out.println(x));
+        students.forEach(System.out::println);
+
+        List<String> names = Arrays.asList("A", "B", "C");
+        List<MobilePhone> mobilePhones = names.stream().map(MobilePhone::new).collect(Collectors.toList());
     }
 }
 
@@ -75,4 +85,11 @@ public class LambdaFunctions {
 interface MathOperation {
     int operate(int a, int b);
 //    int show(int a, float b);
+}
+class MobilePhone {
+    String name;
+
+    public MobilePhone(String name) {
+        this.name = name;
+    }
 }
