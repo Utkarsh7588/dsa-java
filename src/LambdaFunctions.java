@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class LambdaFunctions {
     public static void main(String[] args) {
         //Java 8 --> minimal code, functional programming
-        //Java 8 --> lambda expression, Streams, Date & Time API
+        //Java 8 --> lambda expression, streams.Streams, Date & Time API
 
         // lambda expression
         // Is an anonymous function( no name, no return type, no access modifier)
