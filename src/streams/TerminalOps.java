@@ -76,6 +76,13 @@ public class TerminalOps {
         long lCount = sentence.chars().filter(x -> x == 'l').count();
         System.out.println("Count of 'l': " + lCount);
 
+        // Example: Streams cannot be reused after a terminal operation has been called
+        Stream<String> stream = names.stream();
+        stream.forEach(System.out::println);  // Terminal operation - consumes the stream
+
+        // The following line throws IllegalStateException because the stream is already consumed
+        // stream.map(String::toUpperCase).toList(); // Exception: stream has already been operated upon or closed
+
         // ℹ️ Note: There are two types of operations in streams:
         // - Stateless: don’t depend on previous elements (e.g., map, filter)
         // - Stateful: require awareness of other elements (e.g., sorted, distinct, limit)
