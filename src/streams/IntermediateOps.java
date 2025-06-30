@@ -6,33 +6,66 @@ import java.util.stream.Stream;
 
 public class IntermediateOps {
     public static void main(String[] args) {
-        // Intermediate operations transform a stream into another stream
-        // They are lazy, meaning they don't execute until terminal operation is invoked,
+        // Intermediate operations transform a stream into another stream.
+        // They are *lazy*, meaning they don't perform any processing until a terminal operation is invoked.
 
         List<String> list = Arrays.asList("Akshit", "Akshit", "Akshay", "Ram", "Shyam", "Ghanshyam");
-        Stream<String> filterdStream = list.stream().filter(x -> x.startsWith("A"));
-        // no filterling at this point needs a terminal operation
-        // 1.count
-        long res = list.stream().filter(x -> x.startsWith("A")).count();
-        // 2.map
-        Stream<String> stringStream = list.stream().map(String::toUpperCase);
 
-        // 3. sorted
-        Stream<String> sortedStream = list.stream().sorted();
-        Stream<String> sortedStreamUsingComparator = list.stream().sorted((a, b) -> a.length() - b.length());
+        // .filter() is an intermediate operation: returns a stream with elements that start with "A"
+        Stream<String> filteredStream = list.stream().filter(x -> x.startsWith("A"));
+        // No actual filtering happens until a terminal operation is called
 
-        // 4. distinct
-        System.out.println(list.stream().filter(x -> x.startsWith("A")).distinct().count());
+        // 1. count() - terminal operation that triggers the stream
+        // This counts how many names start with "A"
+        long res = list.stream()
+                .filter(x -> x.startsWith("A"))
+                .count();
+        System.out.println("Count of names starting with A: " + res);
 
-        // 5. limit
-        System.out.println(Stream.iterate(1, x -> x + 1).limit(100).count());
+        // 2. map() - intermediate operation that transforms each element
+        // This converts all names in the list to uppercase
+        Stream<String> stringStream = list.stream()
+                .map(String::toUpperCase);
+        // stringStream is still lazy; nothing is printed until a terminal op like forEach, count, etc.
 
-        // 6. skip
-        System.out.println(Stream.iterate(1, x -> x + 1).skip(10).limit(100).count());
+        // 3. sorted() - sorts the stream in natural order (alphabetical here)
+        Stream<String> sortedStream = list.stream()
+                .sorted();
 
-        // 7. peek
-        // Performs an action on each element as it is consumed.
-        Stream.iterate(1, x -> x + 1).skip(10).limit(100).peek(System.out::println).count();
+        // Custom sorting using Comparator: by length of string
+        Stream<String> sortedStreamUsingComparator = list.stream()
+                .sorted((a, b) -> a.length() - b.length());
+
+        // 4. distinct() - removes duplicates in the stream
+        // This counts how many unique names start with "A"
+        System.out.println("Unique names starting with A: " +
+                list.stream()
+                        .filter(x -> x.startsWith("A"))
+                        .distinct()
+                        .count());
+
+        // 5. limit(n) - returns a stream with only the first 'n' elements
+        // Here we generate an infinite stream using iterate, but take only first 100 elements
+        System.out.println("Count from limit: " +
+                Stream.iterate(1, x -> x + 1)
+                        .limit(100)
+                        .count()); // Outputs 100
+
+        // 6. skip(n) - skips the first 'n' elements in the stream
+        // Skips first 10 and takes next 100 elements from the infinite stream
+        System.out.println("Count after skipping 10 and limiting 100: " +
+                Stream.iterate(1, x -> x + 1)
+                        .skip(10)
+                        .limit(100)
+                        .count()); // Outputs 100
+
+        // 7. peek() - intermediate operation for debugging
+        // It performs an action on each element as it is consumed, without modifying the stream
+        // Here we print each number (from 11 to 110) as the stream is being counted
+        Stream.iterate(1, x -> x + 1)
+                .skip(10)
+                .limit(100)
+                .peek(System.out::println) // acts like a debug print
+                .count(); // Terminal operation that triggers the stream
     }
-
 }
