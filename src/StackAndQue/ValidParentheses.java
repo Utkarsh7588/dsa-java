@@ -23,9 +23,6 @@ public class ValidParentheses {
                 stack.push(ch);
             }
         }
-        if (stack.empty()){
-            return true;
-        }
-        return false;
+        return stack.empty();
     }
 }
