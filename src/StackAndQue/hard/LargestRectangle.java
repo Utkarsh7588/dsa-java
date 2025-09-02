@@ -1,4 +1,4 @@
-package StackAndQue;
+package StackAndQue.hard;
 
 import java.util.Stack;
 
