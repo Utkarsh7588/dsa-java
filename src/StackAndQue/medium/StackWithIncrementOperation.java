@@ -28,13 +28,13 @@ public class StackWithIncrementOperation {
 
     public void push(int x) {
         if (index < stack.length) {
-            stack[index]=x;
+            stack[index] = x;
             index++;
         }
     }
 
     public int pop() {
-        if (index!=0) {
+        if (index != 0) {
             index--;
             return stack[index];
         }
@@ -44,7 +44,7 @@ public class StackWithIncrementOperation {
 
     public void increment(int k, int val) {
         for (int i = 0; i < k && i < stack.length; i++) {
-            stack[i]+=val;
+            stack[i] += val;
         }
     }
 }
