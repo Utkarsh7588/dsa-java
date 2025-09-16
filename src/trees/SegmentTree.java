@@ -40,7 +40,7 @@ public class SegmentTree {
         int mid = (startIndex + endIndex) / 2;
         node.left = populate(arr, startIndex, mid);
         node.right = populate(arr, mid + 1, endIndex);
-        node.data=node.left.data+node.right.data;
+        node.data = node.left.data + node.right.data;
         return node;
     }
 
@@ -84,7 +84,7 @@ public class SegmentTree {
         if (node.left != null && startInterval <= node.left.startInterval && node.left.endInterval >= endInterval) {
             return sumInRange(startInterval, endInterval, node.left);
         } else if (node.left != null && startInterval >= node.left.startInterval) {
-            int sum = sumInRange(startInterval, node.left.endInterval, node.left) + sumInRange(node.left.endInterval+1, endInterval, node.right);
+            int sum = sumInRange(startInterval, node.left.endInterval, node.left) + sumInRange(node.left.endInterval + 1, endInterval, node.right);
             return sum;
         } else {
             return sumInRange(startInterval, endInterval, node.right);
