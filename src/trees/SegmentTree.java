@@ -25,32 +25,32 @@ public class SegmentTree {
     public void populate(int[] arr) {
 //        Node n = new Node(0, arr.length - 1);
 //        n.data = sum(arr, 0, arr.length - 1);
-        this.root = populate(arr, 0, arr.length - 1, root);
+        this.root = populate(arr, 0, arr.length - 1);
 
     }
 
-    private Node populate(int[] arr, int startIndex, int endIndex, Node node) {
+    private Node populate(int[] arr, int startIndex, int endIndex) {
         if (startIndex == endIndex) {
             Node n = new Node(startIndex, endIndex);
-            n.data = sum(arr, startIndex, endIndex);
+            n.data = arr[startIndex];
             return n;
         }
 
-        node = new Node(startIndex, endIndex);
-        node.data = sum(arr, startIndex, endIndex);
+        Node node = new Node(startIndex, endIndex);
         int mid = (startIndex + endIndex) / 2;
-        node.left = populate(arr, startIndex, mid, node.left);
-        node.right = populate(arr, mid + 1, endIndex, node.right);
+        node.left = populate(arr, startIndex, mid);
+        node.right = populate(arr, mid + 1, endIndex);
+        node.data=node.left.data+node.right.data;
         return node;
     }
 
-    private int sum(int[] arr, int startIndex, int endIndex) {
-        int sum = 0;
-        for (int i = startIndex; i <= endIndex; i++) {
-            sum = sum + arr[i];
-        }
-        return sum;
-    }
+//    private int sum(int[] arr, int startIndex, int endIndex) {
+//        int sum = 0;
+//        for (int i = startIndex; i <= endIndex; i++) {
+//            sum = sum + arr[i];
+//        }
+//        return sum;
+//    }
 
     public void update(int value, int index) {
         update(value, index, this.root);
