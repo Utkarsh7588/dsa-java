@@ -26,25 +26,49 @@ public class PopulateNextRightPointers {
         }
     }
 
+//    public Node connect(Node root) {
+//        if (root == null) return null;
+//        Queue<Node> queue = new LinkedList<>();
+//        queue.add(root);
+//        while (!queue.isEmpty()) {
+//            List<Node> list = new ArrayList<>();
+//            int size = queue.size();
+//            Node prev = null;
+//            for (int i = 0; i < size; i++) {
+//                Node node = queue.remove();
+//                if (prev != null) {
+//                    prev.next = node;
+//                }
+//                if (node.left != null) queue.add(node.left);
+//                if (node.right != null) queue.add(node.right);
+//                prev = node;
+//            }
+//        }
+//        return root;
+//    }
+
     public Node connect(Node root) {
-        if (root == null) return null;
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            List<Node> list = new ArrayList<>();
-            int size = queue.size();
-            Node prev = null;
-            for (int i = 0; i < size; i++) {
-                Node node = queue.remove();
-                if (prev != null) {
-                    prev.next = node;
-                }
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
-                prev = node;
+
+        if (root == null)
+            return null;
+
+        Node levelStart = root;
+        while (levelStart != null) {
+            Node curr = levelStart;
+            while (curr != null) {
+                if (curr.left != null)
+                    curr.left.next = curr.right;
+
+                if (curr.right != null && curr.next != null)
+                    curr.right.next = curr.next.left;
+
+                curr = curr.next;
+
             }
+            levelStart = levelStart.left;
         }
         return root;
+
     }
 
     // --------------------- Helper: Build Tree from Array ---------------------
