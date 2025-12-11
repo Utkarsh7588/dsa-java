@@ -9,7 +9,7 @@ import java.util.Queue;
 
 class LevelOrderTraversal {
     // LeetCode TreeNode definition
-    class TreeNode {
+    static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
